@@ -1,0 +1,51 @@
+version: '3.9'
+services:
+  frontend:
+    build:
+      context: ./weather-app-frontend
+    ports:
+      - "5173:5173"
+      - "4173:4173"
+    volumes:
+      - ./weather-app-frontend:/app 
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+  backend:
+    build:
+      context: ./weather-app-backend
+      # dockerfile: ./Dockerfile.development
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./weather-app-backend:/app
+    environment:
+      - FLASK_ENV=development
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:postgres@db:5432/weather-app
+      - API_KEY=${API_KEY}
+    networks:
+      - backend_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: weather-app
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      retries: 5
+      start_period: 10s
+
+networks:
+  backend_network:
+    driver: bridge

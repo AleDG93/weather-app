@@ -1,0 +1,26 @@
+.env
+
+# Logs
+./weather-app-frontend/logs
+./weather-app-frontend/*.log
+./weather-app-frontend/npm-debug.log*
+./weather-app-frontend/yarn-debug.log*
+./weather-app-frontend/yarn-error.log*
+./weather-app-frontend/pnpm-debug.log*
+./weather-app-frontend/lerna-debug.log*
+
+./weather-app-frontend/node_modules
+./weather-app-frontend/dist
+./weather-app-frontend/dist-ssr
+./weather-app-frontend/*.local
+
+# Editor directories and files
+./weather-app-frontend/.vscode/*
+./weather-app-frontend/!.vscode/extensions.json
+./weather-app-frontend/.idea
+./weather-app-frontend/.DS_Store
+./weather-app-frontend/*.suo
+./weather-app-frontend/*.ntvs*
+./weather-app-frontend/*.njsproj
+./weather-app-frontend/*.sln
+./weather-app-frontend/*.sw?

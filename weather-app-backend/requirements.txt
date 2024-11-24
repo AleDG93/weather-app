@@ -1,0 +1,6 @@
+flask
+watchdog
+Flask-SQLAlchemy
+psycopg2-binary
+flask-cors
+requests
